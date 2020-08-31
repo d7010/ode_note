@@ -1,0 +1,113 @@
+\documentclass[dvipdfmx,autodetect-engine]{jbook}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{nccmath}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{here}
+\usepackage{fancyhdr}
+\definecolor{astral}{RGB}{46,116,181}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\disk}{\mathbb{D}}
+\newcommand{\Imdisk}{f(\mathbb{D})}
+\newcommand{\relmiddle}[1]{\mathrel{}\middle#1\mathrel{}}
+
+\tcbuselibrary{theorems}
+\newtcbtheorem[number within=section]{mytheo}{}{coltitle=astral,width=\linewidth,arc=0mm,colback=astral!20!white,colframe=astral!20!white,colframe=astral!20!white,fonttitle=\bfseries}{th}
+
+\newtcbtheorem[number within=section]{mydef}{}{coltitle=orange,width=\linewidth,arc=0mm,colback=orange!20!white,colframe=orange!20!white,colframe=orange!20!white,fonttitle=\bfseries}{th}
+
+\begin{document}
+\pagestyle{fancy}
+  \fancyhead{}
+  \fancyhead[RO,RE]{\rightmark}
+  \fancyhead[LE,LO]{\leftmark}
+  \cfoot{\thepage}
+  \renewcommand{\chaptermark}[1]{\markboth{第\ \thechapter\ 章~#1}{}}
+  \renewcommand{\sectionmark}[1]{\markright{\thesection #1}{}}
+
+ \chapter{ ボホナー積分}
+ ルベーグ積分の理論はリーマン積分を自然に拡張し，収束定理をはじめとする多くの実り豊かな結果をもたらしてきた．
+ ルベーグ積分は実（複素）数値関数に対して定義され，さらに（有限次元）ベクトル値関数へと自然に拡張される．
+ そのさらなる一般化としてバナッハ空間値関数に対する積分が定義できるかということが問題となる．
+ その一つの定式化を与えるのがボホナー積分である．
+\section{ボホナー積分の定義}
+  \begin{mydef}{\textbf{Notation}}{not1}
+    \begin{itemize}
+      \item $(E,\|\ \|)$はバナッハ空間．
+      \item $\mathcal{B}(X)$は$X$のボレル集合族．
+      \item $(\Omega , \mathcal{F},\mu)$は$\sigma$-有限な測度空間．
+    \end{itemize}
+  \end{mydef}
+　まずは単関数の積分を定義する．
+  \begin{mydef}{\textbf{Definition}}{def1}
+    単関数からなる集合
+    \begin{equation*}
+      \mathcal{E}:=\left\{ f:\Omega \to X \relmiddle| f=\sum_{k=1}^{n}x_{k}\chi_{A_k},x_k \in E , A_k \in \mathcal{F} , \mu(A_k)< \infty  \right\}.
+    \end{equation*}
+    ベクトル空間$\mathcal{E}$のセミノルムを次で定める．
+    \begin{equation*}
+      \|f\|_{\mathcal{E}}:=\int \|f\|d\mu.
+    \end{equation*}
+    $(\mathcal{E},\|\ \|_{\mathcal{E}})$を$\|\ \|_{\mathcal{E}}$についての同値関係で割ることでノルム空間をえるが，簡潔のため同じ記号$(\mathcal{E},\|\ \|_{\mathcal{E}})$で表す．
+  \end{mydef}
+  \begin{mytheo}{\textbf{Proposition}}{theo1}
+    任意の$f\in \mathcal{E}$は
+    \begin{equation*}
+      f=\sum_{k=1}^{n}x_k \chi_{A_k},\ \ \ A_{k}は互いに素
+    \end{equation*}
+    と書くことができる．
+  \end{mytheo}
+  \begin{proof}
+    $f$は単関数であり，$f(\Omega)=\{x_1,\ldots,x_n\}$($x_i$は相異なる)について$A_k:=f^{-1}(x_k)$とおけば求める表示を得る．
+  \end{proof}
+
+  \begin{mydef}{\textbf{Definition}}{def2}
+    $f=\sum_{k=1}^{n}x_k \chi_{A_k}$($A_k$は互いに素)に対し，
+    \begin{equation*}
+      \int f d\mu := \sum_{k=1}^{n}x_k \mu\left(A_k\right).
+    \end{equation*}
+  \end{mydef}
+
+  この定義がfの表示及び$\|\ \|_{\mathcal{E}}$についての同値関係によらないことを確認する．
+
+  \begin{mytheo}{\textbf{Proposition}}{theo2}
+    $\int f$,$f\in \mathcal{E}$は$f=\sum_{k=1}^{n}x_k \chi_{A_k}$($A_{k}$は互いに素)の表示によらない．　\par
+    また$\|f\|_{\mathcal{E}}=0$なら$\int f=0$である．\par
+    したがって線形写像
+    \begin{equation*}
+      \begin{array}{ccc}
+          (\mathcal{E},\|\ \|_{\mathcal{E}}) & {\longrightarrow} & (E,\|\ \|) \\
+          f & \longmapsto & \int fd\mu
+      \end{array}
+    \end{equation*}
+    が定まる．
+  \end{mytheo}
+  \begin{proof}
+    $f(\Omega)=\{y_1,\ldots,y_m\}$($x_i$は相異なる)について$B_k:=f^{-1}(y_k)$とおく．$A_{k}$は互いに素であり$f$は単関数なので
+    \begin{align*}
+      \sum_{k=1}^{n}x_k \mu\left(A_k\right) &= \sum_{k=1}^{n} \sum_{l=1}^{m} x_k \mu\left(A_k\cap B_l\right) \\
+                                            &= \sum_{l=1}^{m} \sum_{k=1}^{n} y_l \mu\left(A_k\cap B_l\right) \\
+                                            &= \sum_{l=1}^{m} y_l \mu\left(B_l\right)
+    \end{align*}
+    よってfの表示によらない．\par
+    $\|f\|_{\mathcal{E}}=0$なる$f\in\mathcal{E}$について，$f=\sum_{k=1}^{n}x_k \chi_{A_k}$($A_{k}$は互いに素)と書いた時
+    \begin{align*}
+      \int \|f\| d\mu = \sum_{k=1}^{n}\|x_k\|\mu\left(A_k\right) = 0
+    \end{align*}
+    なので$\int f d\mu = \sum_{k=1}^{n}x_k\mu\left(A_k\right)=0$を得る．
+  \end{proof}
+%  \begin{mytheo}{This is my title}{theoexample}
+%        aa
+%  \end{mytheo}
+%  \begin{mydef}{\textbf{Definition}}{def1}
+%    aa
+%  \end{mydef}
+
+\end{document}
