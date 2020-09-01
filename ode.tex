@@ -36,7 +36,9 @@
  ルベーグ積分の理論はリーマン積分を自然に拡張し，収束定理をはじめとする多くの実り豊かな結果をもたらしてきた．
  ルベーグ積分は実（複素）数値関数に対して定義され，さらに（有限次元）ベクトル値関数へと自然に拡張される．
  そのさらなる一般化としてバナッハ空間値関数に対する積分が定義できるかということが問題となる．
- その一つの定式化を与えるのがボホナー積分である．
+ その一つの定式化を与えるのがボホナー積分である．\par
+ この章ではボホナー積分を簡潔に導入し，微積分学の基本定理を示すことを目標とする．
+
 \section{ボホナー積分の定義}
   \begin{mydef}{\textbf{Notation}}{not1}
     \begin{itemize}
@@ -75,7 +77,7 @@
     \end{equation*}
   \end{mydef}
 
-  この定義がfの表示及び$\|\ \|_{\mathcal{E}}$についての同値関係によらないことを確認する．
+  この定義が$f$の表示及び$\|\ \|_{\mathcal{E}}$についての同値関係によらないことを確認する．
 
   \begin{mytheo}{\textbf{Proposition}}{theo2}
     $\int f$,$f\in \mathcal{E}$は$f=\sum_{k=1}^{n}x_k \chi_{A_k}$($A_{k}$は互いに素)の表示によらない．　\par
@@ -83,8 +85,8 @@
     したがって線形写像
     \begin{equation*}
       \begin{array}{ccc}
-          (\mathcal{E},\|\ \|_{\mathcal{E}}) & {\longrightarrow} & (E,\|\ \|) \\
-          f & \longmapsto & \int fd\mu
+          \rm{int}:\ \ (\mathcal{E},\|\ \|_{\mathcal{E}}) & {\longrightarrow} & (E,\|\ \|) \\
+           \ \ \ \ \ \ \ \ f & \longmapsto & \int fd\mu
       \end{array}
     \end{equation*}
     が定まる．
@@ -96,13 +98,47 @@
                                             &= \sum_{l=1}^{m} \sum_{k=1}^{n} y_l \mu\left(A_k\cap B_l\right) \\
                                             &= \sum_{l=1}^{m} y_l \mu\left(B_l\right)
     \end{align*}
-    よってfの表示によらない．\par
+    よって$f$の表示によらない．\par
     $\|f\|_{\mathcal{E}}=0$なる$f\in\mathcal{E}$について，$f=\sum_{k=1}^{n}x_k \chi_{A_k}$($A_{k}$は互いに素)と書いた時
     \begin{align*}
       \int \|f\| d\mu = \sum_{k=1}^{n}\|x_k\|\mu\left(A_k\right) = 0
     \end{align*}
     なので$\int f d\mu = \sum_{k=1}^{n}x_k\mu\left(A_k\right)=0$を得る．
   \end{proof}
+
+  \begin{mytheo}{\textbf{Proposition}}{theo3}
+    $f\in \mathcal{E}$に対し$\|\int fd\mu\|\leqq\int\|f\|d\mu$．　\par
+    よって$\rm{int}:\mathcal{E}\to E$は有界線型写像であり，拡張原理より$\rm{\overline{int}}:\mathcal{\overline{E}}\to E$を得る．
+  \end{mytheo}
+  \begin{proof}
+    三角不等式より
+    \begin{align*}
+      \| \int f d\mu \| \leqq \sum_{k=1}^{n}\|x_k\|\mu\left(A_k\right) = \int \|f\| d\mu.
+    \end{align*}
+  \end{proof}
+  次に$\mathcal{\overline{E}}$の具体的な表示を求める．
+
+  \begin{mydef}{\textbf{Definition}}{def3}
+    関数$f:\Omega \to E$が強可測関数であるとは，$\mathcal{F}/{\mathcal{B}\left(E \right)}$-可測かつ$f(\Omega)\subset E$が可分であることをいう．
+  \end{mydef}
+
+  \begin{mydef}{\textbf{Definition}}{def4}
+    $1\leqq p < \infty$に対し，
+    \begin{align*}
+      \mathcal{L}^p \left( \Omega,\mathcal{F},\mu ; E \right) = \left\{ f:\Omega \to E \relmiddle| fは強可測関数 , \int \|f\|^p d\mu < \infty \right\}
+    \end{align*}
+    そしてセミノルムを
+    \begin{align*}
+      \|f\|_{L^p} := \left( \int \| f \|^p d\mu \right)^{\frac{1}{p}}
+    \end{align*}
+    と定める．$\mathcal{L}^p \left( \Omega,\mathcal{F},\mu ; E \right)$を$\|f\|_{L^p}$についての同値関係で割って得られるノルム空間を
+    $\left(L^p \left( \Omega,\mathcal{F},\mu ; E \right), \|f\|_{L^p} \right)$と書く．
+  \end{mydef}
+
+
+
+%  $L^1 \left( \Omega,\mathcal{F},\mu ; E \right):= \mathcal{\overline{E}}$を示すために，いくつか準備をする．
+
 %  \begin{mytheo}{This is my title}{theoexample}
 %        aa
 %  \end{mytheo}
